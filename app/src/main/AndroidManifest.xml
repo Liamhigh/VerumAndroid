@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.verum.android">
+    package="com.verumomnis.forensic">
 
     <application
         android:allowBackup="true"

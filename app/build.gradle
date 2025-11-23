@@ -9,11 +9,11 @@ android {
         checkReleaseBuilds false
     }
 
-    namespace 'com.verum.android'
+    namespace 'com.verumomnis.forensic'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.verum.android"
+        applicationId "com.verumomnis.forensic"
         minSdk 24
         targetSdk 33
         versionCode 1
