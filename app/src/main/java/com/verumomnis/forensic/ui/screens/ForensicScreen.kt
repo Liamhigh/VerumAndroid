@@ -15,6 +15,7 @@ fun ForensicScreen(nav: NavController) {
     val context = LocalContext.current
     var input by remember { mutableStateOf("") }
     var resultText by remember { mutableStateOf("") }
+    var isProcessing by remember { mutableStateOf(false) }
 
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Text("Enter your statement or evidence below:")
@@ -22,18 +23,34 @@ fun ForensicScreen(nav: NavController) {
         TextField(
             value = input,
             onValueChange = { input = it },
-            modifier = Modifier.fillMaxWidth().height(160.dp)
+            modifier = Modifier.fillMaxWidth().height(160.dp),
+            enabled = !isProcessing
         )
         Spacer(Modifier.height(20.dp))
-        Button(onClick = {
-            val result = VerumOmnisEngine.process(context, input)
-            resultText = "Contradictions:\n${result.contradictions.joinToString("\n")}\n\n" +
-                    "Behaviour Flags:\n${result.behaviouralFlags.joinToString("\n")}"
-            nav.navigate("pdf")
-        }) {
-            Text("Run Forensic Analysis")
+        Button(
+            onClick = {
+                isProcessing = true
+                val result = VerumOmnisEngine.process(context, input)
+                resultText = "Contradictions:\n${result.contradictions.joinToString("\n")}\n\n" +
+                        "Behaviour Flags:\n${result.behaviouralFlags.joinToString("\n")}\n\n" +
+                        "PDF: ${result.pdfFile.path}"
+                isProcessing = false
+            },
+            enabled = input.isNotBlank() && !isProcessing
+        ) {
+            Text(if (isProcessing) "Processing..." else "Run Forensic Analysis")
         }
         Spacer(Modifier.height(20.dp))
-        Text(resultText)
+        if (resultText.isNotEmpty()) {
+            Text("Results:", style = MaterialTheme.typography.titleMedium)
+            Text(resultText)
+            Spacer(Modifier.height(20.dp))
+            Button(
+                onClick = { nav.navigate("pdf") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("View PDF Report")
+            }
+        }
     }
 }
