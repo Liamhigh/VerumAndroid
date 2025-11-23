@@ -6,6 +6,8 @@ import com.tom_roush.pdfbox.pdmodel.font.PDType1Font
 
 object PdfFooter {
     fun add(document: PDDocument, footer: String) {
+        if (document.pages.count == 0) return
+        
         val page = document.pages[0]
         val cs = PDPageContentStream(
             document,

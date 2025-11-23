@@ -10,6 +10,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 
 object PdfSealEngine {
+    private const val HASH_DISPLAY_LENGTH = 32
+    
     fun createSealedPdf(context: Context, text: String): File {
         PDFBoxResourceLoader.init(context)
         
@@ -32,7 +34,7 @@ object PdfSealEngine {
         val hash = HashUtil.sha512(baos.toByteArray())
 
         PdfWatermark.add(document, "VERUM OMNIS")
-        PdfFooter.add(document, "SHA-512: ${hash.take(32)}…")
+        PdfFooter.add(document, "SHA-512: ${hash.take(HASH_DISPLAY_LENGTH)}…")
 
         document.save(outputFile)
         document.close()

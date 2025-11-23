@@ -8,6 +8,7 @@ object ContradictionDetector {
                 old.entities.intersect(newClaim.entities.toSet()).isNotEmpty()
             ) {
                 if (old.content.contains("never", true) &&
+                    old.entities.isNotEmpty() &&
                     newClaim.content.contains(old.entities.first(), true)
                 ) {
                     contradictions.add(
