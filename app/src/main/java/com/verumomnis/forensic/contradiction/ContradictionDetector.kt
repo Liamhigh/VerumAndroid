@@ -4,11 +4,12 @@ object ContradictionDetector {
     fun check(newClaim: Claim, history: List<Claim>): List<String> {
         val contradictions = mutableListOf<String>()
         history.forEach { old ->
-            if (old.speaker == newClaim.speaker && old.claimType == newClaim.claimType &&
+            if (old.speaker == newClaim.speaker && 
+                old.claimType == newClaim.claimType &&
+                old.entities.isNotEmpty() &&
                 old.entities.intersect(newClaim.entities.toSet()).isNotEmpty()
             ) {
                 if (old.content.contains("never", true) &&
-                    old.entities.isNotEmpty() &&
                     newClaim.content.contains(old.entities.first(), true)
                 ) {
                     contradictions.add(
