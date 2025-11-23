@@ -1,21 +1,28 @@
 package com.verumomnis.forensic.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-
-private val LightColors = lightColorScheme()
-private val DarkColors = darkColorScheme()
+import androidx.compose.ui.graphics.Color
+import com.verumomnis.forensic.ui.theme.*
 
 @Composable
-fun VoTheme(content: @Composable () -> Unit) {
-    val colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors
-
+fun VerumTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = MaterialTheme.typography,
+        colorScheme = darkColorScheme(
+            primary = VO_AccentBlue,
+            onPrimary = Color.White,
+            background = VO_Black,
+            onBackground = Color.White,
+            surface = VO_DeepBlue,
+            onSurface = Color.White,
+            error = VO_Red
+        ),
+        typography = Typography,
         content = content
     )
 }
+
+// Keep VoTheme as alias for backward compatibility
+@Composable
+fun VoTheme(content: @Composable () -> Unit) = VerumTheme(content)
