@@ -1,0 +1,3 @@
+rootProject.name = "VerumAndroid"
+include(":app")
+gradle.ext.sdkDir = new File('fake-sdk')
