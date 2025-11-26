@@ -9,11 +9,11 @@ android {
         checkReleaseBuilds false
     }
 
-    namespace 'com.verum.android'
+    namespace 'com.verumomnis.forensic'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.verum.android"
+        applicationId "com.verumomnis.forensic"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -65,6 +65,9 @@ dependencies {
     implementation "androidx.compose.ui:ui:1.6.0"
     implementation "androidx.compose.material3:material3:1.2.0"
     implementation "androidx.compose.ui:ui-tooling-preview:1.6.0"
+
+    // Navigation for Compose
+    implementation "androidx.navigation:navigation-compose:2.7.6"
 
     // PDFBox for Android (native + stable)
     implementation "com.tom-roush:pdfbox-android:2.0.27.0"
